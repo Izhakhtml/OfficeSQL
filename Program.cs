@@ -16,18 +16,16 @@ namespace OfficeSQL
             //string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=OFFICE_DB;Integrated Security=True;Pooling=False";
             //GetAllEmployees(connectionString);
             //CreateEmployee(connectionString);
-            //Console.WriteLine("enter ID");
-            //UpdateEmployee(connectionString,int.Parse(Console.ReadLine()));
+            //UpdateEmployee(connectionString);
             //Console.WriteLine("enter ID to delete");
             //DeleteEmployee(connectionString, int.Parse(Console.ReadLine()));
 
             // managerDB path \\ 
             List<Manager> managerList = new List<Manager>();
-            string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=ManagerDB;Integrated Security=True;Pooling=False";
-            GetAllManagers(connectionString);
+            //string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=ManagerDB;Integrated Security=True;Pooling=False";
+            //GetAllManagers(connectionString);
             //CreateManager(connectionString);
-            //Console.WriteLine("enter ID");
-            //UpadateManager(connectionString,int.Parse(Console.ReadLine()));
+            //UpadateManager(connectionString));
             //Console.WriteLine("enter ID to delete");
             //DeleteManager(connectionString,int.Parse(Console.ReadLine()));
            }
@@ -75,11 +73,19 @@ namespace OfficeSQL
 
                 try
                 {
+                 Console.WriteLine("Enter name:");
+                 string name = Console.ReadLine();
+                 Console.WriteLine("Enter birthday:");
+                 string Birthyear = Console.ReadLine();
+                 Console.WriteLine("Enter email:");
+                 string email = Console.ReadLine();
+                 Console.WriteLine("Enter salary:");
+                 int salart = int.Parse(Console.ReadLine());
                     using (SqlConnection connection1 = new SqlConnection(connection))
                     {
                         connection1.Open();
                         string qury = $@"INSERT INTO Employees(Name,Birthyear,Email,Salart)
-                        VALUES('{Console.ReadLine()}','{Console.ReadLine()}','{ Console.ReadLine()}',{int.Parse(Console.ReadLine())})";
+                        VALUES('{name}','{Birthyear}','{email}',{salart})";
                         SqlCommand command = new SqlCommand(qury, connection1);
                         int Execute = command.ExecuteNonQuery();
                         Console.WriteLine(Execute);
@@ -96,18 +102,28 @@ namespace OfficeSQL
                 }
             }
 
-            static void UpdateEmployee(string connection,int id)
+            static void UpdateEmployee(string connection)
             {
                 try
                 {
-                    using(SqlConnection connection1 = new SqlConnection(connection))
+                Console.WriteLine("Enter name:");
+                string name = Console.ReadLine();
+                Console.WriteLine("Enter birthday:");
+                string Birthyear = Console.ReadLine();
+                Console.WriteLine("Enter email:");
+                string email = Console.ReadLine();
+                Console.WriteLine("Enter salary:");
+                int salart = int.Parse(Console.ReadLine());
+                Console.WriteLine("Enter ID:");
+                int id = int.Parse(Console.ReadLine());
+                using (SqlConnection connection1 = new SqlConnection(connection))
                     {
                         connection1.Open();
                         string qury = $@"UPDATE Employees
-                                         SET Name = '{Console.ReadLine()}'
-                                          Birthyear ='{Console.ReadLine()}'
-                                          Email = '{Console.ReadLine()}'
-                                          Salart = {int.Parse(Console.ReadLine())}   
+                                         SET Name = '{name}'
+                                          Birthyear ='{Birthyear}'
+                                          Email = '{email}'
+                                          Salart = {salart}   
                                          WHERE Id={id}";
                         SqlCommand command = new SqlCommand(qury,connection1);
                         int Execute = command.ExecuteNonQuery();
@@ -150,7 +166,7 @@ namespace OfficeSQL
 
             }
 
-            static void GetAllManagers(string connection)
+            static void GetAllManagers(string connection, List<Manager> managerList)
             {
                 try
                 {
@@ -169,6 +185,7 @@ namespace OfficeSQL
                                 Console.WriteLine(execute.GetDateTime(3));
                                 Console.WriteLine(execute.GetString(4));
                                 Console.WriteLine(execute.GetString(5));
+                                managerList.Add(new Manager(execute.GetString(1), execute.GetString(2), (execute.GetDateTime(3)).ToString(), execute.GetString(4), execute.GetString(5)));
                             }
                         }
                         else
@@ -194,11 +211,21 @@ namespace OfficeSQL
 
                 try
                 {
-                    using (SqlConnection connection1 = new SqlConnection(connection))
+                Console.WriteLine("Enter first name:");
+                string firstN = Console.ReadLine();
+                Console.WriteLine("Enter last name:");
+                string lastN = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Birthday = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Email = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Department = Console.ReadLine();
+                using (SqlConnection connection1 = new SqlConnection(connection))
                     {
                         connection1.Open();
                         string qury = $@"INSERT INTO Manager(FirstName,LastName,Birthday,Email,Department)
-                        VALUES('{Console.ReadLine()}','{ Console.ReadLine()}','{Console.ReadLine()}','{Console.ReadLine()}','{Console.ReadLine()}')";
+                        VALUES('{firstN}','{lastN}','{Birthday}','{Email}','{Department}')";
                         SqlCommand command = new SqlCommand(qury, connection1);
                         int Execute = command.ExecuteNonQuery();
                         Console.WriteLine(Execute);
@@ -215,19 +242,31 @@ namespace OfficeSQL
                 }
             }
 
-            static void UpadateManager(string connection, int id)
+            static void UpadateManager(string connection)
             {
                 try
                 {
-                    using (SqlConnection connection1 = new SqlConnection(connection))
+                Console.WriteLine("Enter first name:");
+                string firstN = Console.ReadLine();
+                Console.WriteLine("Enter last name:");
+                string lastN = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Birthday = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Email = Console.ReadLine();
+                Console.WriteLine("Enter first name:");
+                string Department = Console.ReadLine();
+                Console.WriteLine("Enter ID:");
+                int id = int.Parse(Console.ReadLine());
+                using (SqlConnection connection1 = new SqlConnection(connection))
                     {
                         connection1.Open();
                         string qury = $@"UPDATE Manager
-                                         SET FirstName = '{Console.ReadLine()}'
-                                             LastName ='{Console.ReadLine()}'
-                                             Birthday ='{Console.ReadLine()}'
-                                             Email ='{Console.ReadLine()}'
-                                             Department ='{Console.ReadLine()}'
+                                         SET FirstName = '{firstN}'
+                                             LastName ='{lastN}'
+                                             Birthday ='{Birthday}'
+                                             Email ='{Email}'
+                                             Department ='{Department}'
                                          WHERE Id={id}";
                         SqlCommand command = new SqlCommand(qury, connection1);
                         int Execute = command.ExecuteNonQuery();
