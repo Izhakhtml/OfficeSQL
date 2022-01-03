@@ -12,26 +12,26 @@ namespace OfficeSQL
         static void Main(string[] args)
         {
             // offifeDB path \\
-            //List<Employee> employeeList = new List<Employee>();
+            List<Employee> employeeList = new List<Employee>();
             //string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=OFFICE_DB;Integrated Security=True;Pooling=False";
             //GetAllEmployees(connectionString);
             //CreateEmployee(connectionString);
             //Console.WriteLine("enter ID");
-            //updateEmployee(connectionString,int.Parse(Console.ReadLine()));
+            //UpdateEmployee(connectionString,int.Parse(Console.ReadLine()));
             //Console.WriteLine("enter ID to delete");
             //DeleteEmployee(connectionString, int.Parse(Console.ReadLine()));
 
             // managerDB path \\ 
-            //List<Manager> managerList = new List<Manager>();
-            //string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=ManagerDB;Integrated Security=True;Pooling=False";
-            //GetAllManagers(connectionString);
+            List<Manager> managerList = new List<Manager>();
+            string connectionString = "Data Source=LAPTOP-K0H6TSU4;Initial Catalog=ManagerDB;Integrated Security=True;Pooling=False";
+            GetAllManagers(connectionString);
             //CreateManager(connectionString);
             //Console.WriteLine("enter ID");
             //UpadateManager(connectionString,int.Parse(Console.ReadLine()));
             //Console.WriteLine("enter ID to delete");
             //DeleteManager(connectionString,int.Parse(Console.ReadLine()));
-
-            void GetAllEmployees(string connection)
+           }
+            static void GetAllEmployees(string connection,List<Employee> employeeList)
             {
                 try
                 {
@@ -49,6 +49,7 @@ namespace OfficeSQL
                                 Console.WriteLine(dataReader.GetDateTime(2));
                                 Console.WriteLine(dataReader.GetString(3));
                                 Console.WriteLine(dataReader.GetInt32(4));
+                               employeeList.Add(new Employee(dataReader.GetString(1),(dataReader.GetDateTime(2)).ToString(), dataReader.GetString(3), dataReader.GetInt32(4)));
                             }
                         }
                         else
@@ -69,7 +70,7 @@ namespace OfficeSQL
                 }
             }
 
-            void CreateEmployee(string connection)
+            static void CreateEmployee(string connection)
             {
 
                 try
@@ -95,7 +96,7 @@ namespace OfficeSQL
                 }
             }
 
-            void updateEmployee(string connection,int id)
+            static void UpdateEmployee(string connection,int id)
             {
                 try
                 {
@@ -124,7 +125,7 @@ namespace OfficeSQL
                 }
             }
 
-            void DeleteEmployee(string connection,int id)
+            static void DeleteEmployee(string connection,int id)
             {
                 try
                 {
@@ -149,7 +150,7 @@ namespace OfficeSQL
 
             }
 
-            void GetAllManagers(string connection)
+            static void GetAllManagers(string connection)
             {
                 try
                 {
@@ -164,9 +165,10 @@ namespace OfficeSQL
                             while (execute.Read())
                             {
                                 Console.WriteLine(execute.GetString(1));
-                                Console.WriteLine(execute.GetDateTime(2));
-                                Console.WriteLine(execute.GetString(3));
-                                Console.WriteLine(execute.GetInt32(4));
+                                Console.WriteLine(execute.GetString(2));
+                                Console.WriteLine(execute.GetDateTime(3));
+                                Console.WriteLine(execute.GetString(4));
+                                Console.WriteLine(execute.GetString(5));
                             }
                         }
                         else
@@ -187,7 +189,7 @@ namespace OfficeSQL
 
             }
 
-            void CreateManager(string connection)
+            static void CreateManager(string connection)
             {
 
                 try
@@ -213,7 +215,7 @@ namespace OfficeSQL
                 }
             }
 
-            void UpadateManager(string connection, int id)
+            static void UpadateManager(string connection, int id)
             {
                 try
                 {
@@ -243,7 +245,7 @@ namespace OfficeSQL
                 }
             }
 
-            void DeleteManager(string connection , int id)
+            static void DeleteManager(string connection , int id)
             {
                 try
                 {
@@ -266,6 +268,6 @@ namespace OfficeSQL
                     Console.WriteLine(ex.Message);
                 }
             }
-        }
+        
     }
 }
